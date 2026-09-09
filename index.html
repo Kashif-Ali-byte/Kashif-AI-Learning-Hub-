@@ -53,8 +53,7 @@
             text-decoration: none;
             color: inherit;
         }
-
-        /* ===== SCROLLBAR ===== */
+          /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -130,7 +129,6 @@
                 transform: translate(40px, 20px) scale(1.05);
             }
         }
-
         /* ===== APP WRAPPER ===== */
         .app-wrapper {
             position: relative;
@@ -190,8 +188,7 @@
         }
         .btn-back i {
             font-size: 14px;
-        }
-
+            }
         /* ===== VIEWS ===== */
         .view {
             display: none;
@@ -241,8 +238,7 @@
             color: var(--text-secondary);
             line-height: 1.7;
         }
-
-        /* ===== TRACK CARDS (Home) ===== */
+          /* ===== TRACK CARDS (Home) ===== */
         .track-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -342,8 +338,7 @@
             transform: scale(1.04);
             box-shadow: 0 8px 30px rgba(108, 59, 240, 0.4);
         }
-
-        /* ===== MODULE CARDS (Track Detail) ===== */
+           /* ===== MODULE CARDS (Track Detail) ===== */
         .module-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -401,8 +396,7 @@
             border-radius: 20px;
             border: 1px solid rgba(0, 212, 255, 0.08);
         }
-
-        /* ===== LECTURE TABLE (Module Detail) ===== */
+          /* ===== LECTURE TABLE (Module Detail) ===== */
         .lecture-list {
             display: flex;
             flex-direction: column;
@@ -477,8 +471,7 @@
         .page-header .goal strong {
             color: #fff;
         }
-
-        /* ===== BACK BUTTON ===== */
+         /* ===== BACK BUTTON ===== */
         .back-row {
             display: flex;
             align-items: center;
@@ -575,8 +568,7 @@
             text-align: center;
             color: var(--text-muted);
         }
-
-        /* ===== RESPONSIVE TWEAKS ===== */
+         /* ===== RESPONSIVE TWEAKS ===== */
         @media (max-width: 480px) {
             .app-wrapper {
                 padding: 0 12px 30px;
@@ -663,14 +655,13 @@
             </div>
         </div>
     </div>
-
-    <!-- ===== APP ===== -->
+     <!-- ===== APP ===== -->
     <div class="app-wrapper" id="app">
 
         <!-- HEADER -->
         <header class="header">
             <div class="logo">
-                <i class="fas fa-brain"></i>Kashif-AI-Learning-Hub
+                <i class="fas fa-brain"></i> Kashif-AI-Learning-Hub
             </div>
             <div class="header-actions">
                 <button class="btn-back" id="globalBack" style="display:none;">
@@ -855,13 +846,12 @@
                 icon: 'fa-microchip',
                 desc: 'Advanced AI engineering for production systems, MLOps, and scalable deployments.',
                 goal: 'Engineer robust AI pipelines and deploy models at scale.',
-                modules: [], // disabled for now
+                modules: [],
                 disabled: true
             }]
         };
 
-        //
-        ============================================================
+        / ============================================================
         // VIEW MANAGEMENT
         // ============================================================
         let currentView = 'home';
@@ -872,7 +862,6 @@
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('view' + viewId).classList.add('active');
             currentView = viewId;
-            // Back button visibility
             const backBtn = document.getElementById('globalBack');
             if (viewId === 'home') {
                 backBtn.style.display = 'none';
@@ -909,7 +898,6 @@
                 grid.appendChild(card);
             });
 
-            // Event listeners for track buttons
             document.querySelectorAll('.track-card .tc-btn:not([disabled])').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const trackId = this.dataset.track;
@@ -949,7 +937,7 @@
             showView('Track');
         }
 
-        // ============================================================
+         // ============================================================
         // OPEN: MODULE
         // ============================================================
         function openModule(trackId, moduleId) {
@@ -1025,7 +1013,6 @@
         renderHome();
         showView('Home');
 
-        // Event listeners
         document.getElementById('globalBack').addEventListener('click', function() {
             handleBack(this.dataset.back);
         });
@@ -1041,7 +1028,6 @@
             if (e.target === this) closeLecture();
         });
 
-        // Keyboard
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 if (document.getElementById('lectureOverlay').classList.contains('open')) {
