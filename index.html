@@ -670,4 +670,389 @@
         <!-- HEADER -->
         <header class="header">
             <div class="logo">
-                <i class="fas fa-brain"></i> Kashif-AI-Le
+                <i class="fas fa-brain"></i>Kashif-AI-Learning-Hub
+            </div>
+            <div class="header-actions">
+                <button class="btn-back" id="globalBack" style="display:none;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+        </header>
+
+        <!-- ===== VIEW: HOME ===== -->
+        <div class="view active" id="viewHome">
+            <section class="hero">
+                <h1>Building the <span class="highlight">future</span><br />with AI</h1>
+                <p>Your structured journey through AI Automation Engineering &amp; AI Engineering.</p>
+            </section>
+
+            <div class="track-grid" id="trackGrid">
+                <!-- rendered by JS -->
+            </div>
+        </div>
+
+        <!-- ===== VIEW: TRACK DETAIL ===== -->
+        <div class="view" id="viewTrack">
+            <div class="page-header">
+                <div class="back-row">
+                    <button class="btn-back" data-back="home"><i class="fas fa-arrow-left"></i> Home</button>
+                </div>
+                <h2 id="trackTitle">Track Title</h2>
+                <div class="desc" id="trackDesc">Track description</div>
+                <div class="goal" id="trackGoal"><strong>Goal:</strong> Track goal</div>
+            </div>
+            <div class="module-grid" id="moduleGrid">
+                <!-- rendered by JS -->
+            </div>
+        </div>
+
+        <!-- ===== VIEW: MODULE DETAIL ===== -->
+        <div class="view" id="viewModule">
+            <div class="page-header">
+                <div class="back-row">
+                    <button class="btn-back" data-back="track"><i class="fas fa-arrow-left"></i> Back to Track</button>
+                </div>
+                <h2 id="moduleTitle">Module Title</h2>
+                <div class="desc" id="moduleDesc">Module description</div>
+                <div class="goal" id="moduleGoal"><strong>Goal:</strong> Module goal</div>
+            </div>
+            <div class="lecture-list" id="lectureList">
+                <!-- rendered by JS -->
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <div class="motivation">
+                <i class="fas fa-rocket"></i> Empowering minds with AI <i class="fas fa-heart" style="color:#f72585;"></i>
+            </div>
+            <div style="font-size:13px;margin-top:4px;">
+                &copy; 2026 Kashif Ali Umrani — AI Learning Hub
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ============================================================
+        // DATA
+        // ============================================================
+        const DATA = {
+            tracks: [{
+                id: 'track1',
+                name: 'AI Automation Engineering',
+                icon: 'fa-robot',
+                desc: 'Master the art of automating workflows using AI agents, APIs, and no-code tools.',
+                goal: 'Build production-ready automation solutions using Make.com, n8n, and cloud deployment.',
+                modules: [{
+                    id: 'm1',
+                    name: 'Basic Computer Science',
+                    icon: 'fa-laptop-code',
+                    desc: 'Foundational concepts of computer science, networking, APIs, and cloud computing.',
+                    goal: 'Understand core CS principles to build a strong foundation for AI automation.',
+                    lectures: [
+                        'Client & Server',
+                        'Units of Memory',
+                        'Application Development',
+                        'Applications & Types of Applications',
+                        'APIs (Application Programming Interface)',
+                        'Calling Gemini & OpenAI APIs',
+                        'Networking Concepts',
+                        'Cloud Computing - 1',
+                        'Cloud Computing - 2'
+                    ]
+                }, {
+                    id: 'm2',
+                    name: 'AI Fundamentals',
+                    icon: 'fa-brain',
+                    desc: 'Comprehensive journey through AI/ML concepts, from classical to generative AI.',
+                    goal: 'Build deep understanding of AI models, training, and deployment with Azure.',
+                    lectures: [
+                        'Part I: Foundations of AI',
+                        'Introduction to Artificial Intelligence',
+                        'Introduction to Machine Learning',
+                        'Model Training, Inferencing, and Utilization',
+                        'Part II: Core Machine Learning Techniques',
+                        'Types of Machine Learning',
+                        'Regression Model Training',
+                        'Practical Regression with Azure ML (Hands-on)',
+                        'Binary Classification Model Training',
+                        'Multiclass Classification Model Training',
+                        'Reinforcement Learning',
+                        'Part III: Applied AI and Specialized Domains',
+                        'AI Development Lifecycle',
+                        'Generative AI Fundamentals (Part 1)',
+                        'Azure AI-900 Certification Guide (Study Plan)',
+                        'Generative AI Fundamentals (Part 2 — detailed)',
+                        'Deploying Generative AI Models (Endpoints, Prompt Engineering)',
+                        'Practical Generative AI with Azure (Hands-on)',
+                        'Computer Vision with Azure AI',
+                        'AI Speech',
+                        'Natural Language Processing (NLP)',
+                        'Question Answering Knowledge Bases',
+                        'Conversational Language Understanding (CLU)',
+                        'AI-Powered Information Extraction',
+                        'Practical Information Extraction with Azure (Hands-on)',
+                        'Part IV: Ethics, Certification, and Conclusion',
+                        'Responsible AI',
+                        'Azure AI Content Understanding + AI-900 Certification Guide (Final)'
+                    ]
+                }, {
+                    id: 'm3',
+                    name: 'AI Automation',
+                    icon: 'fa-cogs',
+                    desc: 'Practical automation using Make.com, n8n, and AI agent orchestration.',
+                    goal: 'Design and deploy autonomous AI agents and workflows for real-world tasks.',
+                    lectures: [
+                        'Module 1: Foundations of Artificial Intelligence',
+                        'Understanding AI: From Traditional to Agentic Systems',
+                        'Introduction to AI Paradigms',
+                        'Traditional AI: Rule-Based Systems',
+                        'Generative AI and Large Language Models (LLMs)',
+                        'AI Agents: Autonomous Task Execution',
+                        'Agentic AI: Multi-Agent Collaboration',
+                        'Comparative Analysis of AI Types',
+                        'Key Definitions and Common Misconceptions',
+                        'Module 2: Introduction to AI Automation',
+                        'AI Automation Fundamentals and Career Pathways',
+                        'Prerequisites for AI Automation',
+                        'From Theory to Practice: Automating Repetitive Tasks',
+                        'Traditional Automation vs. AI-Powered Automation',
+                        'Implementing AI Automation: A Step-by-Step Framework',
+                        'Choosing Between AI Workflows and AI Agents',
+                        'Selecting No-Code Automation Tools',
+                        'Tool Comparison: Make.com, Zapier, and N8N',
+                        'Module 3: Building Automated Workflows with Make.com',
+                        'Creating Your First E-commerce Automation Workflow (Part 1)',
+                        'Secure Email Automation with OAuth 2.0 (Part 2)',
+                        'Automated Customer Service Email System',
+                        'Building a 24/7 AI Customer Service Agent',
+                        'Module 4: Professional Automation with n8n',
+                        'Free n8n Setup and Deployment Options',
+                        'Core Concepts: APIs, Webhooks, and Data Formats',
+                        'Configuring Secure Google OAuth for n8n',
+                        'Building Your First Autonomous AI Agent in n8n',
+                        'Creating a Retrieval-Augmented Generation (RAG) AI Agent',
+                        'Module 5: Integrating AI with Communication Platforms',
+                        'WhatsApp Business Integration with n8n',
+                        'Embedding n8n Chatbots into Websites',
+                        'Local n8n with Secure Tunneling for Telegram',
+                        'Module 6: Advanced n8n Techniques and Logic',
+                        'Data Filtering and Conditional Routing with n8n',
+                        'Version Control for n8n Workflows using GitHub',
+                        'Module 7: Professional Project Delivery and Advanced Tools',
+                        'The Complete n8n Project Delivery Framework',
+                        'Accelerating Development with the n8n AI Workflow Builder',
+                        'Module 8: Cloud Deployment and Cost Management',
+                        'Free n8n Setup on Google Cloud Platform (GCP)',
+                        'Free n8n Setup on Amazon Web Services (AWS)',
+                        'Cost Estimation for AI Automation Solutions'
+                    ]
+                }]
+            }, {
+                id: 'track2',
+                name: 'AI Engineering',
+                icon: 'fa-microchip',
+                desc: 'Advanced AI engineering for production systems, MLOps, and scalable deployments.',
+                goal: 'Engineer robust AI pipelines and deploy models at scale.',
+                modules: [], // disabled for now
+                disabled: true
+            }]
+        };
+
+        //
+        ============================================================
+        // VIEW MANAGEMENT
+        // ============================================================
+        let currentView = 'home';
+        let currentTrackId = null;
+        let currentModuleId = null;
+
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view' + viewId).classList.add('active');
+            currentView = viewId;
+            // Back button visibility
+            const backBtn = document.getElementById('globalBack');
+            if (viewId === 'home') {
+                backBtn.style.display = 'none';
+            } else {
+                backBtn.style.display = 'flex';
+                backBtn.dataset.back = viewId === 'track' ? 'home' : 'track';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // RENDER: HOME
+        // ============================================================
+        function renderHome() {
+            const grid = document.getElementById('trackGrid');
+            grid.innerHTML = '';
+            DATA.tracks.forEach((track, idx) => {
+                const card = document.createElement('div');
+                card.className = `track-card ${track.disabled ? 'disabled' : ''}`;
+                card.innerHTML = `
+                        <div class="tc-icon"><i class="fas ${track.icon}"></i></div>
+                        <h2>${track.name}</h2>
+                        <p>${track.desc}</p>
+                        ${!track.disabled ? `
+                            <button class="tc-btn" data-track="${track.id}">
+                                Explore the Track <i class="fas fa-arrow-right"></i>
+                            </button>
+                        ` : `
+                            <button class="tc-btn" style="background:#4a4a6a;cursor:default;box-shadow:none;" disabled>
+                                <i class="fas fa-lock"></i> Coming Soon
+                            </button>
+                        `}
+                    `;
+                grid.appendChild(card);
+            });
+
+            // Event listeners for track buttons
+            document.querySelectorAll('.track-card .tc-btn:not([disabled])').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const trackId = this.dataset.track;
+                    openTrack(trackId);
+                });
+            });
+        }
+
+        // ============================================================
+        // OPEN: TRACK
+        // ============================================================
+        function openTrack(trackId) {
+            const track = DATA.tracks.find(t => t.id === trackId);
+            if (!track || track.disabled) return;
+            currentTrackId = trackId;
+
+            document.getElementById('trackTitle').textContent = track.name;
+            document.getElementById('trackDesc').textContent = track.desc;
+            document.getElementById('trackGoal').innerHTML = `<strong>Goal:</strong> ${track.goal}`;
+
+            const grid = document.getElementById('moduleGrid');
+            grid.innerHTML = '';
+            track.modules.forEach((mod, idx) => {
+                const card = document.createElement('div');
+                card.className = 'module-card';
+                card.style.animationDelay = `${idx * 0.08}s`;
+                card.innerHTML = `
+                        <div class="mc-icon"><i class="fas ${mod.icon}"></i></div>
+                        <h3>${mod.name}</h3>
+                        <p>${mod.desc}</p>
+                        <div class="mc-badge">${mod.lectures.length} lectures</div>
+                    `;
+                card.addEventListener('click', () => openModule(trackId, mod.id));
+                grid.appendChild(card);
+            });
+
+            showView('Track');
+        }
+
+        // ============================================================
+        // OPEN: MODULE
+        // ============================================================
+        function openModule(trackId, moduleId) {
+            const track = DATA.tracks.find(t => t.id === trackId);
+            const mod = track.modules.find(m => m.id === moduleId);
+            if (!mod) return;
+            currentModuleId = moduleId;
+
+            document.getElementById('moduleTitle').textContent = mod.name;
+            document.getElementById('moduleDesc').textContent = mod.desc;
+            document.getElementById('moduleGoal').innerHTML = `<strong>Goal:</strong> ${mod.goal}`;
+
+            const list = document.getElementById('lectureList');
+            list.innerHTML = '';
+            mod.lectures.forEach((lec, idx) => {
+                const item = document.createElement('div');
+                item.className = 'lecture-item';
+                item.innerHTML = `
+                        <span class="li-num">#${String(idx + 1).padStart(2, '0')}</span>
+                        <span class="li-title">${lec}</span>
+                        <span class="li-icon"><i class="fas fa-chevron-right"></i></span>
+                    `;
+                item.addEventListener('click', () => openLecture(trackId, moduleId, idx, lec));
+                list.appendChild(item);
+            });
+
+            showView('Module');
+        }
+
+        // ============================================================
+        // OPEN: LECTURE (Overlay)
+        // ============================================================
+        function openLecture(trackId, moduleId, idx, title) {
+            const track = DATA.tracks.find(t => t.id === trackId);
+            const mod = track.modules.find(m => m.id === moduleId);
+            document.getElementById('ldTitle').textContent = title;
+            document.getElementById('ldMeta').textContent = `${track.name} · ${mod.name} · Lecture ${idx + 1}`;
+            document.getElementById('ldBody').innerHTML = `
+                    <div class="placeholder">
+                        <i class="fas fa-edit" style="font-size:32px;color:var(--accent-2);display:block;margin-bottom:12px;"></i>
+                        <p><strong>Lecture: ${title}</strong></p>
+                        <p style="font-size:14px;margin-top:6px;">Aap yahan is lecture ka complete data (topics, notes, code, etc.) baad mein add kar sakte hain.</p>
+                        <p style="font-size:13px;margin-top:12px;color:var(--text-muted);">
+                            <i class="fas fa-info-circle"></i> Is placeholder ko apni zaroorat ke mutabiq change karein.
+                        </p>
+                    </div>
+                `;
+            document.getElementById('lectureOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLecture() {
+            document.getElementById('lectureOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ============================================================
+        // BACK BUTTONS
+        // ============================================================
+        function handleBack(target) {
+            if (target === 'home') {
+                showView('Home');
+                currentTrackId = null;
+                currentModuleId = null;
+            } else if (target === 'track') {
+                if (currentTrackId) openTrack(currentTrackId);
+            }
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderHome();
+        showView('Home');
+
+        // Event listeners
+        document.getElementById('globalBack').addEventListener('click', function() {
+            handleBack(this.dataset.back);
+        });
+
+        document.querySelectorAll('[data-back]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                handleBack(this.dataset.back);
+            });
+        });
+
+        document.getElementById('ldClose').addEventListener('click', closeLecture);
+        document.getElementById('lectureOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeLecture();
+        });
+
+        // Keyboard
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.getElementById('lectureOverlay').classList.contains('open')) {
+                    closeLecture();
+                }
+            }
+        });
+
+        console.log('🚀 Kashif-AI-Learning-Hub loaded successfully!');
+        console.log(`📚 ${DATA.tracks.reduce((acc, t) => acc + t.modules.reduce((a, m) => a + m.lectures.length, 0), 0)} lectures available.`);
+    </script>
+
+</body>
+</html>
