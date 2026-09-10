@@ -13,19 +13,26 @@
             padding: 0;
             box-sizing: border-box;
         }
+        /* ===== THEME: "Nebula" — Violet + Teal (dark) =====
+           Purane purple-cyan theme se hat kar ek zyada premium aur
+           distinctive combo: deep violet + teal-green, warm
+           amber-rose highlight ke saath contrast ke liye. */
         :root {
-            --bg-primary: #0b0e1a;
-            --bg-secondary: #141b2b;
-            --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-card-hover: rgba(255, 255, 255, 0.08);
-            --border-glass: rgba(255, 255, 255, 0.06);
-            --text-primary: #f0f2ff;
-            --text-secondary: #b0b8d0;
-            --text-muted: #6a7290;
-            --accent-1: #6c3bf0;
-            --accent-2: #00d4ff;
-            --gradient-main: linear-gradient(135deg, #6c3bf0, #00d4ff);
-            --shadow-glow: 0 8px 40px rgba(108, 59, 240, 0.25);
+            --bg-primary: #0a0c16;
+            --bg-secondary: #12162a;
+            --bg-card: rgba(255, 255, 255, 0.045);
+            --bg-card-hover: rgba(255, 255, 255, 0.09);
+            --border-glass: rgba(255, 255, 255, 0.07);
+            --text-primary: #f2f4ff;
+            --text-secondary: #adb4d1;
+            --text-muted: #6b7291;
+            --accent-1: #8b5cf6;
+            --accent-2: #2dd4bf;
+            --highlight-1: #fb923c;
+            --highlight-2: #f43f5e;
+            --gradient-main: linear-gradient(135deg, #8b5cf6, #2dd4bf);
+            --gradient-highlight: linear-gradient(135deg, #fb923c, #f43f5e);
+            --shadow-glow: 0 8px 40px rgba(139, 92, 246, 0.28);
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-sm: 10px;
@@ -69,7 +76,7 @@
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
-            background: radial-gradient(circle at 20% 30%, #1a0a3a 0%, #0b0e1a 70%);
+            background: radial-gradient(circle at 20% 30%, #1a1440 0%, #0a0c16 70%);
         }
         .bg-canvas .orb {
             position: absolute;
@@ -81,7 +88,7 @@
         .bg-canvas .orb:nth-child(1) {
             width: 500px;
             height: 500px;
-            background: #6c3bf0;
+            background: #8b5cf6;
             top: -10%;
             left: -10%;
             animation-duration: 30s;
@@ -89,7 +96,7 @@
         .bg-canvas .orb:nth-child(2) {
             width: 400px;
             height: 400px;
-            background: #00d4ff;
+            background: #2dd4bf;
             bottom: -10%;
             right: -10%;
             animation-duration: 28s;
@@ -98,7 +105,7 @@
         .bg-canvas .orb:nth-child(3) {
             width: 300px;
             height: 300px;
-            background: #f72585;
+            background: #f43f5e;
             top: 40%;
             left: 40%;
             animation-duration: 22s;
@@ -134,18 +141,37 @@
             flex-wrap: wrap;
             gap: 12px;
         }
+        /* ===== LOGO (redesigned) ===== */
+        .logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 18px 6px 6px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 40px;
+            backdrop-filter: blur(8px);
+        }
+        .logo-badge {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0c16;
+            font-size: 14px;
+        }
         .logo {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
             background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-        .logo i {
-            margin-right: 8px;
-            -webkit-text-fill-color: var(--accent-2);
         }
         .header-actions {
             display: flex;
@@ -222,10 +248,10 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(108, 59, 240, 0.15);
+            text-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
         }
         .hero h1 .highlight {
-            background: linear-gradient(135deg, #f72585, #ff6b6b);
+            background: var(--gradient-highlight);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -278,25 +304,46 @@
             background: var(--bg-card-hover);
             transform: translateY(-4px);
             box-shadow: var(--shadow-glow);
-            border-color: rgba(108, 59, 240, 0.2);
+            border-color: rgba(139, 92, 246, 0.25);
+        }
+        /* Track 1 (active track) — premium styling so it stands out */
+        .track-card.featured {
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .track-card.featured::before {
+            opacity: 1;
+        }
+        .track-card .tc-badge {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            background: rgba(45, 212, 191, 0.12);
+            color: var(--accent-2);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(45, 212, 191, 0.25);
+            letter-spacing: 0.3px;
+        }
+        .track-card .tc-icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(139, 92, 246, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .track-card .tc-icon-circle i {
+            font-size: 24px;
+            color: var(--accent-2);
         }
         .track-card.disabled {
             opacity: 0.5;
             filter: grayscale(0.5);
             pointer-events: none;
-        }
-        .track-card.disabled::after {
-            content: '🔒 Coming Soon';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(247, 37, 133, 0.15);
-            color: #f72585;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 4px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(247, 37, 133, 0.2);
         }
         .track-card .tc-icon {
             font-size: 32px;
@@ -329,11 +376,11 @@
             gap: 10px;
             align-self: flex-start;
             font-family: inherit;
-            box-shadow: 0 4px 20px rgba(108, 59, 240, 0.25);
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
         }
         .track-card .tc-btn:hover {
             transform: scale(1.04);
-            box-shadow: 0 8px 30px rgba(108, 59, 240, 0.4);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
         }
         .module-grid {
             display: grid;
@@ -364,7 +411,7 @@
         .module-card:hover {
             background: var(--bg-card-hover);
             transform: translateY(-3px);
-            border-color: rgba(0, 212, 255, 0.15);
+            border-color: rgba(45, 212, 191, 0.2);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
         .module-card .mc-icon {
@@ -386,10 +433,10 @@
             margin-top: 10px;
             font-size: 13px;
             color: var(--accent-2);
-            background: rgba(0, 212, 255, 0.06);
+            background: rgba(45, 212, 191, 0.08);
             padding: 2px 14px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(45, 212, 191, 0.12);
         }
         .lecture-list {
             display: flex;
@@ -447,7 +494,7 @@
             line-height: 1.7;
         }
         .page-header .goal {
-            background: rgba(108, 59, 240, 0.06);
+            background: rgba(139, 92, 240, 0.06);
             border-left: 4px solid var(--accent-1);
             padding: 12px 18px;
             border-radius: var(--radius-sm);
@@ -482,13 +529,24 @@
             color: var(--accent-2);
             margin: 0 6px;
         }
+        .footer .intro-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent-2);
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .footer .intro-link:hover {
+            color: #fff;
+        }
         .lecture-detail-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 26, 0.9);
+            background: rgba(10, 10, 22, 0.92);
             backdrop-filter: blur(20px);
             z-index: 2000;
             display: none;
@@ -550,82 +608,6 @@
             text-align: center;
             color: var(--text-muted);
         }
-        /* ===== HAMBURGER MENU ===== */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 26, 0.7);
-            backdrop-filter: blur(6px);
-            z-index: 2500;
-            display: none;
-        }
-        .menu-overlay.open {
-            display: block;
-        }
-        .menu-panel {
-            position: fixed;
-            top: 0;
-            right: -340px;
-            width: 320px;
-            max-width: 85vw;
-            height: 100%;
-            background: var(--bg-secondary);
-            border-left: 1px solid var(--border-glass);
-            z-index: 2600;
-            padding: 24px 22px;
-            transition: right 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            overflow-y: auto;
-        }
-        .menu-panel.open {
-            right: 0;
-        }
-        .menu-panel .mp-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 22px;
-        }
-        .menu-panel .mp-head span {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .menu-panel .mp-close {
-            background: none;
-            border: none;
-            font-size: 26px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .menu-panel .mp-close:hover {
-            color: #fff;
-            transform: rotate(90deg);
-        }
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 12px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            font-size: 15px;
-            font-weight: 500;
-        }
-        .menu-item i {
-            width: 20px;
-            text-align: center;
-            color: var(--accent-2);
-        }
-        .menu-item:hover {
-            background: var(--bg-card-hover);
-            color: #fff;
-            transform: translateX(-4px);
-        }
         /* ===== INTRO PAGE ===== */
         .intro-box {
             background: var(--bg-card);
@@ -654,10 +636,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 26, 0.85);
+            background: rgba(10, 10, 22, 0.88);
             backdrop-filter: blur(10px);
             z-index: 2500;
-        display: none;
+            display: none;
             justify-content: center;
             padding: 70px 20px;
             overflow-y: auto;
@@ -747,8 +729,8 @@
             .app-wrapper {
                 padding: 0 12px 30px;
             }
-            .header .logo {
-                font-size: 18px;
+            .logo {
+                font-size: 15px;
             }
             .btn-back {
                 padding: 6px 14px;
@@ -782,26 +764,13 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="bg-canvas">
         <div class="orb"></div>
         <div class="orb"></div>
         <div class="orb"></div>
-    </div>
-
-    <!-- Hamburger Menu -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <div class="menu-panel" id="menuPanel">
-        <div class="mp-head">
-            <span>Menu</span>
-            <button class="mp-close" id="menuClose">&times;</button>
-        </div>
-        <div class="menu-item" data-menu="intro"><i class="fas fa-circle-info"></i> Introduction</div>
-        <div class="menu-item" data-menu="home"><i class="fas fa-house"></i> Home</div>
-        <div class="menu-item" data-menu="track1"><i class="fas fa-robot"></i> AI Automation Engineering</div>
-        <div class="menu-item" data-menu="track2"><i class="fas fa-microchip"></i> AI Engineering</div>
-        <div class="menu-item" data-menu="github"><i class="fab fa-github"></i> GitHub Profile</div>
     </div>
 
     <!-- Search -->
@@ -835,15 +804,15 @@
 
     <div class="app-wrapper" id="app">
         <header class="header">
-            <div class="logo">
-                <i class="fas fa-brain"></i> Kashif-AI-Learning-Hub
+            <div class="logo-wrap">
+                <span class="logo-badge"><i class="fas fa-brain"></i></span>
+                <span class="logo">Kashif AI Learning Hub</span>
             </div>
             <div class="header-actions">
                 <button class="btn-back" id="globalBack" style="display:none;">
                     <i class="fas fa-arrow-left"></i> Back
                 </button>
                 <button class="icon-btn" id="searchOpenBtn" title="Search"><i class="fas fa-magnifying-glass"></i></button>
-                <button class="icon-btn" id="menuOpenBtn" title="Menu"><i class="fas fa-bars"></i></button>
             </div>
         </header>
 
@@ -875,9 +844,6 @@
 
         <div class="view" id="viewTrack">
             <div class="page-header">
-                <div class="back-row">
-                    <button class="btn-back" data-back="home"><i class="fas fa-arrow-left"></i> Home</button>
-                </div>
                 <h2 id="trackTitle">Track Title</h2>
                 <div class="desc" id="trackDesc">Track description</div>
                 <div class="goal" id="trackGoal"><strong>Goal:</strong> Track goal</div>
@@ -899,17 +865,30 @@
 
         <div class="footer">
             <div class="motivation">
-                <i class="fas fa-rocket"></i> Empowering minds with AI <i class="fas fa-heart" style="color:#f72585;"></i>
+                <i class="fas fa-rocket"></i> Empowering minds with AI <i class="fas fa-heart" style="color:#f43f5e;"></i>
             </div>
             <div style="font-size:13px;margin-top:4px;">
                 &copy; 2026 Kashif Ali Umrani — AI Learning Hub
             </div>
+            <a href="#" class="intro-link" id="introFooterLink">ℹ️ About This Project</a>
         </div>
     </div>
 
+    <!-- ============================================================
+         MODULAR LECTURE DATA FILES (Option 8)
+         Har module ki lecture-content ek alag file mein hai taake
+         index.html chota aur manageable rahe. Naya content add
+         karne ke liye sirf in files ko edit karein.
+    ============================================================ -->
+    <script src="data/module1-data.js"></script>
+    <script src="data/module2-data.js"></script>
+    <script src="data/module3-data.js"></script>
+
     <script>
         // ============================================================
-        // DATA — (SARA DATA YAHAN MAUJOOD HAI)
+        // DATA — Track / Module / Lecture-title structure
+        // (Ye sirf titles aur navigation structure hai. Har lecture
+        // ka detailed content /data/moduleX-data.js files mein hai.)
         // ============================================================
         const DATA = {
             tracks: [{
@@ -1033,37 +1012,17 @@
                 disabled: true
             }]
         };
-        // ============================================================
-        // LECTURE DATA — (YAHAN APNA MATERIAL ADD KAREIN)
-     // ============================================================
-  const LECTURE_DATA = {
-    // Module 1: Basic Computer Science (m1)
-    m1: {
-        'Client_Server': {
-            intro: 'Client-server model ki buniyadi samajh. Ye network architecture hai jahan client request bhejta hai aur server response deta hai.',
-            topics: ['Client kya hai?', 'Server kya hai?', 'Request-Response Cycle', 'Examples (Web, Email)'],
-            takeaway: 'Client-server model internet ki backbone hai. Har web request isi principle par kaam karti hai.',
-            code: '// Example: Simple HTTP request\nfetch("https://api.example.com/data")\n  .then(res => res.json())\n  .then(data => console.log(data));'
-        },
-        'Units_of_Memory': {
-            intro: 'Computer memory units ka hierarchy. Bit se lekar Terabyte tak ka safar.',
-            topics: ['Bit & Byte', 'KB, MB, GB, TB', 'Memory types (RAM, ROM, Cache)'],
-            takeaway: 'Data storage ka scale samajhna AI/ML ke liye zaroori hai kyunki models gigabytes data process karte hain.'
-        }
-        // Baqi lectures ka data aap yahan add karte rahein
-    },
-    // Module 2: AI Fundamentals (m2)
-    m2: {
-        // Yahan Module 2 ke lectures ka data aayega
-    },
-    // Module 3: AI Automation (m3)
-    m3: {
-        // Yahan Module 3 ke lectures ka data aayega
-    }
-};
+
+        // Combine the modular lecture-content files into one lookup object.
+        // (typeof check = agar koi data file load na ho to app crash na ho)
+        const LECTURE_DATA = {
+            m1: typeof MODULE1_LECTURES !== 'undefined' ? MODULE1_LECTURES : {},
+            m2: typeof MODULE2_LECTURES !== 'undefined' ? MODULE2_LECTURES : {},
+            m3: typeof MODULE3_LECTURES !== 'undefined' ? MODULE3_LECTURES : {}
+        };
 
         // ============================================================
-        // ALL FUNCTIONS (UPDATED & ROBUST)
+        // ALL FUNCTIONS
         // ============================================================
         let currentTrackId = null;
 
@@ -1077,8 +1036,15 @@
                 backBtn.style.display = 'none';
             } else {
                 backBtn.style.display = 'inline-flex';
-                backBtn.dataset.back = viewId === 'Track' ? 'home' : (viewId === 'Intro' ? 'home' : 'track');
+                backBtn.dataset.back = (viewId === 'Track' || viewId === 'Intro') ? 'home' : 'track';
             }
+
+            // Track (3-modules) page ke header se search button hata dein
+            const searchBtn = document.getElementById('searchOpenBtn');
+            if (searchBtn) {
+                searchBtn.style.display = (viewId === 'Track') ? 'none' : 'inline-flex';
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1088,9 +1054,11 @@
             grid.innerHTML = '';
             DATA.tracks.forEach((track) => {
                 const card = document.createElement('div');
-                card.className = 'track-card' + (track.disabled ? ' disabled' : '');
+                const isFeatured = !track.disabled;
+                card.className = 'track-card' + (track.disabled ? ' disabled' : '') + (isFeatured ? ' featured' : '');
                 card.innerHTML = `
-                    <div class="tc-icon"><i class="fas ${track.icon}"></i></div>
+                    ${isFeatured ? `<span class="tc-badge">🚀 Available Now</span>` : ''}
+                    <div class="tc-icon-circle"><i class="fas ${track.icon}"></i></div>
                     <h2>${track.name}</h2>
                     <p>${track.desc}</p>
                     ${!track.disabled ? `
@@ -1174,18 +1142,15 @@
             });
 
             showView('Module');
-      }
+        }
 
-        // ============================================================
-        // Title -> Key helper (FIXED: strips special chars BEFORE
-        // collapsing spaces, so "Client & Server" -> "Client_Server"
-        // matches the LECTURE_DATA key exactly, single underscore).
-        // ============================================================
+        // Title -> Key helper (punctuation pehle hatayein, phir spaces
+        // ko _ mein collapse karein — taake keys hamesha consistent bane).
         function titleToKey(title) {
             return title
-                .replace(/[^a-zA-Z0-9\s]/g, '') // remove punctuation first (&, :, ,, (), -, etc.)
+                .replace(/[^a-zA-Z0-9\s]/g, '')
                 .trim()
-                .replace(/\s+/g, '_');          // then collapse spaces into single _
+                .replace(/\s+/g, '_');
         }
 
         function openLecture(trackId, moduleId, idx, title) {
@@ -1200,7 +1165,7 @@
 
             if (content) {
                 document.getElementById('ldBody').innerHTML = `
-                    <div style="background:rgba(108,59,240,0.05);padding:16px 20px;border-radius:var(--radius-sm);border-left:4px solid var(--accent-2);margin-bottom:20px;">
+                    <div style="background:rgba(139,92,246,0.06);padding:16px 20px;border-radius:var(--radius-sm);border-left:4px solid var(--accent-2);margin-bottom:20px;">
                         <h4 style="color:var(--accent-2);margin-bottom:4px;">📌 Introduction</h4>
                         <p style="color:var(--text-secondary);">${content.intro || 'Introduction content coming soon...'}</p>
                     </div>
@@ -1223,7 +1188,7 @@
                         <p><strong>Lecture: ${title}</strong></p>
                         <p style="font-size:14px;margin-top:6px;">Yahan aap is lecture ka poora data (topics, notes, code) add kar sakte hain.</p>
                         <p style="font-size:13px;margin-top:12px;color:var(--text-muted);">
-                            <i class="fas fa-info-circle"></i> LECTURE_DATA object mein is lecture ki entry add karein (key: "${key}").
+                            <i class="fas fa-info-circle"></i> /data/${moduleId}-data.js mein is lecture ki entry add karein (key: "${key}").
                         </p>
                     </div>
                 `;
@@ -1245,18 +1210,6 @@
             } else if (target === 'track') {
                 if (currentTrackId) openTrack(currentTrackId);
             }
-        }
-
-        // ============================================================
-        // HAMBURGER MENU
-        // ============================================================
-        function openMenu() {
-            document.getElementById('menuOverlay').classList.add('open');
-            document.getElementById('menuPanel').classList.add('open');
-        }
-        function closeMenu() {
-            document.getElementById('menuOverlay').classList.remove('open');
-            document.getElementById('menuPanel').classList.remove('open');
         }
 
         // ============================================================
@@ -1344,27 +1297,6 @@
                 if (e.target === this) closeLecture();
             });
 
-            // Hamburger menu
-            document.getElementById('menuOpenBtn').addEventListener('click', openMenu);
-            document.getElementById('menuClose').addEventListener('click', closeMenu);
-            document.getElementById('menuOverlay').addEventListener('click', closeMenu);
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const target = this.dataset.menu;
-                    closeMenu();
-                    if (target === 'home') {
-                        showView('Home');
-                        currentTrackId = null;
-                    } else if (target === 'intro') {
-                        showView('Intro');
-                    } else if (target === 'track1' || target === 'track2') {
-                        openTrack(target);
-                    } else if (target === 'github') {
-                        window.open('https://github.com/', '_blank');
-                    }
-                });
-            });
-
             // Search
             document.getElementById('searchOpenBtn').addEventListener('click', openSearch);
             document.getElementById('searchClose').addEventListener('click', closeSearch);
@@ -1375,11 +1307,16 @@
                 runSearch(this.value);
             });
 
+            // Footer Introduction link
+            document.getElementById('introFooterLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showView('Intro');
+            });
+
             // Keyboard escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     if (document.getElementById('lectureOverlay').classList.contains('open')) closeLecture();
-                    if (document.getElementById('menuPanel').classList.contains('open')) closeMenu();
                     if (document.getElementById('searchOverlay').classList.contains('open')) closeSearch();
                 }
             });
