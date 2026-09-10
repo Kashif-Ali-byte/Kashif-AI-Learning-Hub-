@@ -930,17 +930,32 @@
         }
 
         // ============================================================
-// UPDATED: openLecture with Data Support
+// UPDATED: openLecture with Smart Key Matching
 // ============================================================
 function openLecture(trackId, moduleId, idx, title) {
     const track = DATA.tracks.find(t => t.id === trackId);
     const mod = track.modules.find(m => m.id === moduleId);
     
-    // Lecture title ko key banayein (spaces hata kar)
-    const key = title.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
+    // Smart key generation (single underscore)
+    const key = title.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '');
     
-    // Data object se content laayein
-    const content = LECTURE_DATA[moduleId]?.[key] || null;
+    // Smart lookup: exact match, then normalized match
+    let content = null;
+    if (LECTURE_DATA[moduleId]) {
+        content = LECTURE_DATA[moduleId][key];
+        
+        // Agar exact match na mile, to normalized compare karein
+        if (!content) {
+            const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '');
+            const targetNorm = normalize(title);
+            for (const k in LECTURE_DATA[moduleId]) {
+                if (normalize(k) === targetNorm) {
+                    content = LECTURE_DATA[moduleId][k];
+                    break;
+                }
+            }
+        }
+    }
     
     document.getElementById('ldTitle').textContent = title;
     document.getElementById('ldMeta').textContent = `${track.name} · ${mod.name} · Lecture ${idx + 1}`;
@@ -964,7 +979,6 @@ function openLecture(trackId, moduleId, idx, title) {
             ${content.code ? `<div style="margin-top:16px;"><h4 style="color:#fff;margin-bottom:4px;">⚙️ Code Snippet</h4><pre style="background:var(--bg-primary);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;color:#b0b8d0;overflow-x:auto;font-size:14px;">${content.code}</pre></div>` : ''}
         `;
     } else {
-        // Default placeholder agar data nahi hai
         document.getElementById('ldBody').innerHTML = `
             <div class="placeholder">
                 <i class="fas fa-edit" style="font-size:32px;color:var(--accent-2);display:block;margin-bottom:12px;"></i>
@@ -979,19 +993,6 @@ function openLecture(trackId, moduleId, idx, title) {
     
     document.getElementById('lectureOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-}
-        function closeLecture() {
-            document.getElementById('lectureOverlay').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function handleBack(target) {
-            if (target === 'home') {
-                showView('Home');
-                currentTrackId = null;
-            } else if (target === 'track') {
-                if (currentTrackId) openTrack(currentTrackId);
-            }
         }
 
         // ============================================================
