@@ -901,25 +901,57 @@
             showView('Module');
         }
 
-        function openLecture(trackId, moduleId, idx, title) {
-            const track = DATA.tracks.find(t => t.id === trackId);
-            const mod = track.modules.find(m => m.id === moduleId);
-            document.getElementById('ldTitle').textContent = title;
-            document.getElementById('ldMeta').textContent = `${track.name} · ${mod.name} · Lecture ${idx + 1}`;
-            document.getElementById('ldBody').innerHTML = `
-                <div class="placeholder">
-                    <i class="fas fa-edit" style="font-size:32px;color:var(--accent-2);display:block;margin-bottom:12px;"></i>
-                    <p><strong>Lecture: ${title}</strong></p>
-                    <p style="font-size:14px;margin-top:6px;">Aap yahan is lecture ka complete data (topics, notes, code, etc.) baad mein add kar sakte hain.</p>
-                    <p style="font-size:13px;margin-top:12px;color:var(--text-muted);">
-                        <i class="fas fa-info-circle"></i> Is placeholder ko apni zaroorat ke mutabiq change karein.
-                    </p>
-                </div>
-            `;
-            document.getElementById('lectureOverlay').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
+        // ============================================================
+// UPDATED: openLecture with Data Support
+// ============================================================
+function openLecture(trackId, moduleId, idx, title) {
+    const track = DATA.tracks.find(t => t.id === trackId);
+    const mod = track.modules.find(m => m.id === moduleId);
+    
+    // Lecture title ko key banayein (spaces hata kar)
+    const key = title.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
+    
+    // Data object se content laayein
+    const content = LECTURE_DATA[moduleId]?.[key] || null;
+    
+    document.getElementById('ldTitle').textContent = title;
+    document.getElementById('ldMeta').textContent = `${track.name} · ${mod.name} · Lecture ${idx + 1}`;
+    
+    if (content) {
+        document.getElementById('ldBody').innerHTML = `
+            <div style="background:rgba(108,59,240,0.05);padding:16px 20px;border-radius:var(--radius-sm);border-left:4px solid var(--accent-2);margin-bottom:20px;">
+                <h4 style="color:var(--accent-2);margin-bottom:4px;">📌 Introduction</h4>
+                <p style="color:var(--text-secondary);">${content.intro || 'Introduction content coming soon...'}</p>
+            </div>
+            <div style="margin-bottom:16px;">
+                <h4 style="color:#fff;margin-bottom:8px;">📚 Topics Covered</h4>
+                <ul style="padding-left:20px;color:var(--text-secondary);">
+                    ${content.topics ? content.topics.map(t => `<li>${t}</li>`).join('') : '<li>Topics will be added soon.</li>'}
+                </ul>
+            </div>
+            <div style="background:var(--bg-primary);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px 20px;margin-top:12px;">
+                <h4 style="color:#fff;margin-bottom:4px;">💡 Key Takeaway</h4>
+                <p style="color:var(--text-muted);">${content.takeaway || 'Aap is lecture ka summary yahan likh sakte hain.'}</p>
+            </div>
+            ${content.code ? `<div style="margin-top:16px;"><h4 style="color:#fff;margin-bottom:4px;">⚙️ Code Snippet</h4><pre style="background:var(--bg-primary);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:16px;color:#b0b8d0;overflow-x:auto;font-size:14px;">${content.code}</pre></div>` : ''}
+        `;
+    } else {
+        // Default placeholder agar data nahi hai
+        document.getElementById('ldBody').innerHTML = `
+            <div class="placeholder">
+                <i class="fas fa-edit" style="font-size:32px;color:var(--accent-2);display:block;margin-bottom:12px;"></i>
+                <p><strong>Lecture: ${title}</strong></p>
+                <p style="font-size:14px;margin-top:6px;">Yahan aap is lecture ka poora data (topics, notes, code) add kar sakte hain.</p>
+                <p style="font-size:13px;margin-top:12px;color:var(--text-muted);">
+                    <i class="fas fa-info-circle"></i> LECTURE_DATA object mein is lecture ki entry add karein.
+                </p>
+            </div>
+        `;
+    }
+    
+    document.getElementById('lectureOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
         function closeLecture() {
             document.getElementById('lectureOverlay').classList.remove('open');
             document.body.style.overflow = '';
